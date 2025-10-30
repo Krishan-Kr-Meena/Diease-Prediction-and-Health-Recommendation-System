@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/creativetimofficial/tailwind-starter-kit/compiled-tailwind.min.css"/>
+     <script src="https://cdn.tailwindcss.com"></script>
+     <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
+     <link rel="icon" href="static/Diagnosmart icon.png" type="image/x-icon">
+     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+      <style>
+        .modal {
+          transition: opacity 0.25s ease;
+        }
+        body.modal-active {
+          overflow-x: hidden;
+          overflow-y: visible !important;
+        }
+      </style>
+
+ <title>FAQs</title>
+</head>
+<body class="antialiased custom-bg">
+
+        <nav class="flex items-center text-black">
+    <div class="top-0 absolute z-50 w-full flex flex-wrap items-center justify-between px-6 py-3 shadow-xl bg-white">
+        <a href="{{ url_for('index') }}" title="Home" class="flex items-center font-bold text-xl px-2">
+            <img src="{{ url_for('static', filename='Diagnosmart icon.png') }}" alt="DiagnoSmart Logo" class="h-8 mr-2"/>
+            <span>DiagnoSmart</span>
+        </a>
+        <ul class="flex-1 text-center text-black">
+            <li class="list-none inline-block px-5 text-lg leading-lg transition-colors duration-300">
+                <a href="{{ url_for('index') }}" class="no-underline px-2 text-black hover:text-gray-600">Home</a>
+            </li>
+            <li class="list-none inline-block px-5 text-lg leading-lg transition-colors duration-300">
+                <a href="{{ url_for('services') }}" class="no-underline px-2 text-black hover:text-gray-600">Diease Detection</a>
+            </li>
+            <li class="list-none inline-block px-5 text-lg leading-lg transition-colors duration-300">
+                <a href="{{ url_for('med_service') }}" class="no-underline px-2 text-black hover:text-gray-600">Medicine Recommendation</a>
+            </li>
+            <li class="list-none inline-block px-5 text-lg leading-lg transition-colors duration-300">
+                <a href="{{ url_for('doc_service') }}" class="no-underline px-2 text-black hover:text-gray-600">Treatment centers</a>
+            </li>
+            <li class="list-none inline-block px-5 text-lg leading-lg transition-colors duration-300 font-bold text-gray-800 border-b-2 border-indigo-500">
+                <a href="{{ url_for('faq') }}" class="no-underline px-2 text-black hover:text-gray-600">FAQs</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+        <main class="pt-24 pb-8 min-h-screen">
+            <div class="container mx-auto px-4 max-w-6xl">
+                  <h1 class="text-5xl font-bold text-center mb-4 text-gray-800">Frequently Asked Questions</h1>
+                  <p class="text-xl text-center text-gray-600 mb-10">Find the answers for the most frequently asked questions below.</p>
+
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    
+                    <div class="bg-white p-6 rounded-xl shadow-lg">
+                        <h6 class="mb-3 text-indigo-700 font-bold text-lg"><i class="fas fa-question-circle text-indigo-500 pe-2 mr-2"></i> What is the purpose of this website?</h6>
+                        <p class="text-gray-700">
+                            The purpose of this website is to provide users with tools to predict diseases, receive Ayurvedic medicine recommendations, and access information about nearby treatment centers.
+                        </p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-lg">
+                        <h6 class="mb-3 text-indigo-700 font-bold text-lg"><i class="fas fa-check-circle text-indigo-500 pe-2 mr-2"></i> Is the information on this website accurate and reliable?</h6>
+                        <p class="text-gray-700">
+                       <strong>Yes</strong>, the core prediction model has high internal accuracy. However, this tool is <strong>not a substitute for professional medical advice</strong>. We recommend seeking advice from a qualified healthcare professional.
+                        </p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-lg">
+                        <h6 class="mb-3 text-indigo-700 font-bold text-lg"><i class="fas fa-chart-line text-indigo-500 pe-2 mr-2"></i> How accurate is the disease predicting model?</h6>
+                        <p class="text-gray-700">
+                        The accuracy of the disease predicting model is generally very high based on the training data. We recommend using the <strong>Stacking Ensemble</strong> model option for the most reliable results.
+                        </p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-lg">
+                        <h6 class="mb-3 text-indigo-700 font-bold text-lg"><i class="fas fa-hand-holding-medical text-indigo-500 pe-2 mr-2"></i> What should I do if the model predicts a disease?</h6>
+                        <p class="text-gray-700">
+                        If the model predicts that you may have a disease, <strong>you must seek the advice of a qualified healthcare professional</strong> for a proper diagnosis and treatment plan. The AI results are informational only.
+                        </p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-lg">
+                        <h6 class="mb-3 text-indigo-700 font-bold text-lg"><i class="fas fa-user-times text-indigo-500 pe-2 mr-2"></i> Can I use this model to diagnose myself?</h6>
+                        <p class="text-gray-700">
+                        **No**. This model is strictly for informational and educational purposes. It cannot replace a comprehensive medical evaluation, lab tests, or professional clinical judgment.
+                        </p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-lg">
+                        <h6 class="mb-3 text-indigo-700 font-bold text-lg"><i class="fas fa-seedling text-indigo-500 pe-2 mr-2"></i> Is Ayurvedic medicine safe?</h6>
+                        <p class="text-gray-700">
+                        Ayurvedic remedies can be safe and effective when used correctly and sourced responsibly. Always <strong>consult with a healthcare professional or certified Ayurvedic practitioner</strong> before beginning any new treatment.
+                        </p>
+                    </div>
+                  </div>
+                </div>
+            </main>
+           <footer class="relative bg-gray-300 pt-8 pb-6">
+                <div class="container mx-auto px-4">
+                  <div class="flex flex-wrap text-center lg:text-left">
+                    <div class="w-full lg:w-6/12 px-4">
+                      <h4 class="text-3xl font-semibold">Join the DiagnoSmart Community!</h4>
+                      <h5 class="text-lg mt-0 mb-2 text-gray-700">
+                        Follow us on social media for updates, tips, and direct support. We aim to respond within 1 business day.    
+                        </h5>
+                    </div>
+                    <div class="w-full lg:w-6/12 px-4 lg:text-right">
+                        <div class="inline-block mt-6">
+                            <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" title="Facebook" aria-label="Facebook" class="bg-white text-blue-600 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 inline-flex">
+                            <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer" title="Twitter" aria-label="Twitter" class="bg-white text-blue-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 inline-flex">
+                            <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" title="Instagram" aria-label="Instagram" class="bg-white text-pink-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 inline-flex">
+                            <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" title="LinkedIn" aria-label="LinkedIn" class="bg-white text-blue-700 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 inline-flex">
+                            <i class="fab fa-linkedin-in"></i>
+                            </a>
+                        </div>  
+                    </div>
+                  </div>    
+                    <hr class="my-6 border-gray-400" />
+                    <div class="flex flex-wrap items-center md:justify-between justify-center">
+        <div class="w-full md:w-4/12 px-4 mx-auto text-center">
+          <div class="text-sm text-gray-500 font-semibold py-1">
+            © 2024 DiagnoSmart. All rights reserved.
+          </div>
+        </div>
+
+      </div>    
+                </div>
+            </footer>
+           </body>
+</html>

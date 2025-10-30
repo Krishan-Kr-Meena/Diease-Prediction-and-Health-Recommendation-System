@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/creativetimofficial/tailwind-starter-kit/compiled-tailwind.min.css"/>
+     <script src="https://cdn.tailwindcss.com"></script>
+     <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
+     <link rel="icon" href="static/Diagnosmart icon.png" type="image/x-icon">
+     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+      <style>
+        .modal {
+          transition: opacity 0.25s ease;
+        }
+        body.modal-active {
+          overflow-x: hidden;
+          overflow-y: visible !important;
+        }
+      </style>
+
+ <title>DiagnoSmart | Service</title>
+</head>
+<body class="antialiased custom-bg">
+
+        <nav class="flex items-center text-black">
+    <div class="top-0 absolute z-50 w-full flex flex-wrap items-center justify-between px-6 py-3 shadow-xl bg-white">
+        <a href="{{ url_for('index') }}" title="Home" class="flex items-center font-bold text-xl px-2">
+            <img src="{{ url_for('static', filename='Diagnosmart icon.png') }}" alt="DiagnoSmart Logo" class="h-8 mr-2"/>
+            <span>DiagnoSmart</span>
+        </a>
+        <ul class="flex-1 text-center text-black">
+            <li class="list-none inline-block px-5 text-lg leading-lg transition-colors duration-300">
+                <a href="{{ url_for('index') }}" class="no-underline px-2 text-black hover:text-gray-600">Home</a>
+            </li>
+            <li class="list-none inline-block px-5 text-lg leading-lg transition-colors duration-300">
+                <a href="{{ url_for('services') }}" class="no-underline px-2 text-black hover:text-gray-600">Diease Detection</a>
+            </li>
+            <li class="list-none inline-block px-5 text-lg leading-lg transition-colors duration-300 {% if request.endpoint == 'med_service' or request.endpoint == 'predict_disease' %}font-bold text-gray-800{% endif %}">
+                <a href="{{ url_for('med_service') }}" class="no-underline px-2 text-black hover:text-gray-600">Medicine Recommendation</a>
+            </li>
+            <li class="list-none inline-block px-5 text-lg leading-lg transition-colors duration-300">
+                <a href="{{ url_for('doc_service') }}" class="no-underline px-2 text-black hover:text-gray-600">Treatment centers</a>
+            </li>
+            <li class="list-none inline-block px-5 text-lg leading-lg transition-colors duration-300">
+                <a href="{{ url_for('faq') }}" class="no-underline px-2 text-black hover:text-gray-600">FAQs</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+         <br>
+        <br>
+        <br>
+</body>
+</html>

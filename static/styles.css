@@ -1,0 +1,4 @@
+.custom-bg {
+    background: radial-gradient(circle at center, white 0%, #e0f2f7 80%);
+    min-height: 100vh;
+}

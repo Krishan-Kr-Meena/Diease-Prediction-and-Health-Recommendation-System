@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link rel="stylesheet"href="https://cdn.jsdelivr.net/gh/creativetimofficial/tailwind-starter-kit/compiled-tailwind.min.css"/>
+    <link rel="icon" href="static/Diagnosmart icon.png" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+   <title>DiagnoSmart | Dashboard</title>
+  </head>
+
+<body class="antialiased custom-bg">
+
+    <!--  Navigation Bar (Fixed and Standardized) -->
+     <nav class="flex items-center text-black">
+        <div class="top-0 absolute z-50 w-full flex flex-wrap items-center justify-between px-6 py-3 shadow-xl bg-white">
+        <a href="{{ url_for('index') }}" title="Home" class="flex items-center font-bold text-xl px-2"><img src="static/Diagnosmart icon.png" alt="DiagnoSmart Logo" class="h-8 mr-2"/><span> DiagnoSmart</span></a>
+        <ul class="flex-1 text-center text-black">
+            <!-- Navigation Links -->
+            <li class="list-none inline-block px-5 text-lg leading-lg transition-colors duration-300">
+                <a href="{{ url_for('index') }}" class="no-underline px-2 text-black hover:text-gray-600">Home</a>
+            </li>
+            <li class="list-none inline-block px-5 text-lg leading-lg transition-colors duration-300">
+                <a href="{{ url_for('services') }}" class="no-underline px-2 text-black hover:text-gray-600">Services</a>
+            </li>
+            <li class="list-none inline-block px-5 text-lg leading-lg transition-colors duration-300">
+                <a href="{{ url_for('med_service') }}" class="no-underline px-2 text-black hover:text-gray-600">Medicine Recommendation</a>
+            </li>
+            <li class="list-none inline-block px-5 text-lg leading-lg transition-colors duration-300">
+                <a href="{{ url_for('doc_service') }}" class="no-underline px-2 text-black hover:text-gray-600">Treatment centers</a>
+            </li>
+            <li class="list-none inline-block px-5 text-lg leading-lg transition-colors duration-300">
+                <a href="{{ url_for('faq') }}" class="no-underline px-2 text-black hover:text-gray-600">FAQs</a>
+            </li>
+          </ul>
+             
+             <!-- Logged In State: Always show Logout button and Dashboard link -->
+             <div class="flex items-center space-x-4">
+                 <a href="{{ url_for('dashboard') }}" class="no-underline text-lg font-semibold text-gray-700">Dashboard</a>
+                 
+                 <!-- Logout Button -->
+                 <a href="{{ url_for('logout') }}">
+                      <button class="bg-black text-white active:bg-gray-800 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none rounded-full transition-all duration-300" type="button"> LOGOUT </button>
+                 </a>
+             </div>
+         </div>
+         </nav>
+     <!--  Navigation Bar-->
+
+    <!-- Main Content -->
+    <main class="pt-24 pb-10 container mx-auto px-6">
+        
+        <h1 class="text-4xl font-bold text-gray-800 mb-8 border-b-4 pb-3">
+        Welcome to Your Dashboard</h1>
+
+        <div class="bg-white p-8 rounded-xl shadow-2xl max-w-lg mx-auto">
+            <h2 class="text-2xl font-semibold text-black mb-6">Welcome back, {{ user_data[0] }}!</h2>
+            
+            <p class="text-gray-600 mb-4">This is your personal information. You are currently logged in.</p>
+
+            <div class="space-y-3 text-lg">
+                <div class="flex">
+                    <strong class="w-32 text-gray-800">First Name :</strong> 
+                    <span class="text-gray-700">{{ user_data[0] }}</span>
+                </div>
+                <div class="flex">
+                    <strong class="w-32 text-gray-800">Last Name :</strong> 
+                    <span class="text-gray-700">{{ user_data[1] }}</span>
+                </div>
+                <div class="flex">
+                    <strong class="w-32 text-gray-800">Email :</strong> 
+                    <span class="text-gray-700">{{ user_data[2] }}</span>
+                </div>
+                <div class="flex">
+                    <strong class="w-32 text-gray-800">Age :</strong> 
+                    <span class="text-gray-700">{{ user_data[3] }}</span>
+                </div>
+                <div class="flex">
+                    <strong class="w-32 text-gray-800">Gender :</strong> 
+                    <span class="text-gray-700">{{ user_data[4] | capitalize }}</span>
+                </div>
+            </div>
+
+            <!-- CTA to Services -->
+            <div class="mt-8">
+                <a href="{{ url_for('services') }}" class="flex inline-block align-items-center justify-center">
+                    <button class="bg-indigo-500 text-white active:bg-indigo-600 font-bold uppercase text-sm px-6 py-3 rounded-full shadow hover:shadow-lg outline-none focus:outline-none transition-all duration-150 ease-linear rounded-full" type="button"> 
+                        Access Prediction Services
+                    </button>
+                </a>
+            </div>
+            
+             <!-- Standalone Logout Button -->
+            <a href="{{ url_for('logout') }}" class="mt-4 flex inline-block align-items-center justify-center">
+                <button class="bg-gray-500 text-white active:bg-gray-600 font-bold uppercase text-sm px-6 py-3 rounded-full shadow hover:shadow-lg outline-none focus:outline-none transition-all duration-150 ease-linear rounded-full" type="button"> 
+                    Logout from Dashboard
+                </button>
+            </a>
+        </div>
+    </main>
+    <!-- End Main Content -->
+
+    <script>
+    // Note: jQuery is assumed to be missing based on context, removing jQuery dependent code.
+    </script>
+
+  </body>
+</html>

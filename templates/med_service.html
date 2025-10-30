@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/creativetimofficial/tailwind-starter-kit/compiled-tailwind.min.css"/>
+     <script src="https://cdn.tailwindcss.com"></script>
+     <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
+     <link rel="icon" href="{{ url_for('static', filename='Diagnosmart icon.png') }}" type="image/x-icon">
+     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+      <style>
+        .modal {
+          transition: opacity 0.25s ease;
+        }
+        body.modal-active {
+          overflow-x: hidden;
+          overflow-y: visible !important;
+        }
+        /* Custom background from your original CSS */
+        .custom-bg {
+            background-color: #f7fafc; /* Light gray/white for content area */
+        }
+      </style>
+ <title>DiagnoSmart | Medicine Recommendation</title>
+</head>
+<body class="antialiased custom-bg">
+
+    <nav class="flex items-center text-black">
+        <div class="top-0 absolute z-50 w-full flex flex-wrap items-center justify-between px-6 py-3 shadow-xl bg-white">
+            <a href="{{ url_for('index') }}" title="Home" class="flex items-center font-bold text-xl px-2">
+                <img src="{{ url_for('static', filename='Diagnosmart icon.png') }}" alt="DiagnoSmart Logo" class="h-8 mr-2"/>
+                <span>DiagnoSmart</span>
+            </a>
+            <ul class="flex-1 text-center text-black">
+                <li class="list-none inline-block px-5 text-lg leading-lg transition-colors duration-300">
+                    <a href="{{ url_for('index') }}" class="no-underline px-2 text-black hover:text-gray-600">Home</a>
+                </li>
+                <li class="list-none inline-block px-5 text-lg leading-lg transition-colors duration-300">
+                    <a href="{{ url_for('services') }}" class="no-underline px-2 text-black hover:text-gray-600">Diease Detection</a>
+                </li>
+                <li class="list-none inline-block px-5 text-lg leading-lg transition-colors duration-300 font-bold text-gray-800">
+                    <a href="{{ url_for('med_service') }}" class="no-underline px-2 text-black hover:text-gray-600">Medicine Recommendation</a>
+                </li>
+                <li class="list-none inline-block px-5 text-lg leading-lg transition-colors duration-300">
+                    <a href="{{ url_for('doc_service') }}" class="no-underline px-2 text-black hover:text-gray-600">Treatment centers</a>
+                </li>
+                <li class="list-none inline-block px-5 text-lg leading-lg transition-colors duration-300">
+                    <a href="{{ url_for('faq') }}" class="no-underline px-2 text-black hover:text-gray-600">FAQs</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <main class="pt-24 pb-8 min-h-screen">
+        <div class="container mx-auto px-4">
+            
+            <h1 class="text-5xl font-bold text-center mb-8 text-gray-800">Medicine Recommendation System</h1>
+            <p class="text-xl text-center text-gray-600 mb-10">Input your symptoms to get an AI-powered disease diagnosis and corresponding treatment recommendations.</p>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="mb-4">
+                        {% for category, message in messages %}
+                            <div class="p-3 mb-2 rounded shadow text-white {% if category == 'success' %}bg-green-500{% elif category == 'danger' %}bg-red-500{% elif category == 'info' %}bg-blue-500{% else %}bg-yellow-500{% endif %}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
+            <div class="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow-2xl text-center">
+                <form method="POST" action="{{ url_for('predict_disease') }}">
+                    
+                    <div class="mb-6">
+                        <label for="symptoms" class="block text-gray-700 text-sm font-bold mb-2">
+                            Enter Your Symptoms (Required)
+                        </label>
+                        <input type="text" id="symptoms" name="symptoms" required
+                               class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                               placeholder="e.g., high_fever, headache, fatigue, joint_pain">
+                        <p class="text-xs text-gray-500 mt-2">Separate multiple symptoms with a comma. Use underscores for multi-word symptoms (e.g., 'muscle_wasting').</p>
+                    </div>
+
+                    <div class="mb-6">
+                        <label for="model_choice" class="block text-gray-700 text-sm font-bold mb-2">
+                            Select AI Model
+                        </label>
+                        <select id="model_choice" name="model_choice"
+                                class="shadow border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                            <option value="1" selected>Stacking Ensemble (Highest Accuracy)</option>
+                            <option value="3">Random Forest</option>
+                            <option value="2">Neural Network</option>
+                        </select>
+                        <p class="text-xs text-gray-500 mt-2">The Stacking Ensemble model typically provides the most reliable results.</p>
+                    </div>
+                    
+                    <div class="flex items-center justify-center">
+                        <button type="submit" 
+                                class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg focus:outline-none focus:shadow-outline transition duration-150 ease-in-out">
+                            Diagnose & Recommend Treatment
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            {% if all_symptoms %}
+            <div class="max-w-3xl mx-auto mt-10 p-6 bg-white rounded-xl shadow-2xl">
+                <h3 class="text-xl font-semibold mb-4 text-gray-700">🔎 List of Recognized Symptoms:</h3>
+                <p class="text-sm text-gray-600 mb-4">Use these exact keywords for best results (single-click to insert a symptom):</p>
+                <div class="flex flex-wrap gap-2 text-sm">
+                    {% for symptom in all_symptoms|sort %}
+                        <span class="bg-gray-200 text-gray-800 px-3 py-1 rounded-full cursor-pointer hover:bg-gray-300 transition duration-100" 
+                              title="Single-click to insert" 
+                              onclick="insertSymptom(this.textContent)">
+                            {{ symptom }}
+                        </span>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
+        </div>
+    </main>
+    
+    <script>
+        function insertSymptom(symptomText) {
+            const inputField = document.getElementById('symptoms');
+            const newSymptom = symptomText.trim();
+            let currentValue = inputField.value.trim();
+
+            if (currentValue === "") {
+                // If input is empty, just insert the new symptom
+                inputField.value = newSymptom;
+            } else {
+                // Check if the symptom is already present to avoid duplicates
+                // Convert to array, trim and lower-case each item for checking
+                const currentSymptoms = currentValue.split(',').map(s => s.trim().toLowerCase());
+                
+                if (!currentSymptoms.includes(newSymptom.toLowerCase())) {
+                    // If input is not empty and new symptom is not a duplicate, append it with a comma
+                    inputField.value = currentValue + ', ' + newSymptom;
+                } else {
+                    // Optionally alert the user if the symptom is already there
+                    // alert('Symptom "' + newSymptom + '" is already entered.');
+                }
+            }
+            // Focus back on the input field for the user to continue typing or clicking
+            inputField.focus();
+        }
+    </script>
+</body>
+</html>

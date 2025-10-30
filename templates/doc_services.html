@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/creativetimofficial/tailwind-starter-kit/compiled-tailwind.min.css"/>
+     <script src="https://cdn.tailwindcss.com"></script>
+     <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
+     <link rel="icon" href="static/Diagnosmart icon.png" type="image/x-icon">
+     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+      <style>
+        .modal {
+          transition: opacity 0.25s ease;
+        }
+        body.modal-active {
+          overflow-x: hidden;
+          overflow-y: visible !important;
+        }
+        .custom-bg {
+            background-color: #f7fafc; 
+        }
+      </style>
+
+ <title>DiagnoSmart | Treatment Centers</title>
+</head>
+<body class="antialiased custom-bg">
+
+     <nav class="flex items-center text-black">
+         <div class="top-0 absolute z-50 w-full flex flex-wrap items-center justify-between px-6 py-3 shadow-xl bg-white">
+             <a href="{{ url_for('index') }}" title="Home" class="flex items-center font-bold text-xl px-2"><img src="static/Diagnosmart icon.png" alt="DiagnoSmart Logo" class="h-8 mr-2"/><span> DiagnoSmart</span></a>
+        <ul class="flex-1 text-center text-black">
+                <li class="list-none inline-block px-5 text-lg leading-lg transition-colors duration-300">
+                <a href="{{ url_for('index') }}" class="no-underline px-2 text-black hover:text-gray-600">Home</a>
+                </li>
+                <li class="list-none inline-block px-5 text-lg leading-lg transition-colors duration-300">
+                <a href="{{ url_for('services') }}" class="no-underline px-2 text-black hover:text-gray-600">Diease Detection</a>
+                </li>
+                <li class="list-none inline-block px-5 text-lg leading-lg transition-colors duration-300">
+                <a href="{{ url_for('med_service') }}" class="no-underline px-2 text-black hover:text-gray-600">Medicine Recommendation</a>
+                </li>
+                 <!-- Current Page Highlight -->
+                <li class="list-none inline-block px-5 text-lg leading-lg transition-colors duration-300 font-bold text-gray-800 border-b-2 border-indigo-500">
+                <a href="{{ url_for('doc_service') }}" class="no-underline px-2 text-black hover:text-gray-600">Treatment centers</a>
+                </li>
+                <li class="list-none inline-block px-5 text-lg leading-lg transition-colors duration-300">
+                <a href="{{ url_for('faq') }}" class="no-underline px-2 text-black hover:text-gray-600">FAQs</a>
+                </li>
+              </ul>
+             </div>
+             </nav>
+
+        <main class="pt-24 pb-8 min-h-screen">
+            <div class="container mx-auto px-4 max-w-4xl">
+                <h1 class="text-5xl font-bold text-center mb-8 text-gray-800">Find Treatment Centers</h1>
+                <p class="text-xl text-center text-gray-600 mb-10">This page will eventually feature resources to locate medical professionals and treatment facilities near you.</p>
+
+                <div class="bg-white p-8 rounded-xl shadow-2xl text-center">
+                    <p class="text-lg text-gray-700 mb-4">Please note: This feature is currently under development.</p>
+                    <a href="{{ url_for('med_service') }}" class="inline-block bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg transition duration-150 ease-in-out">
+                        Go to Medicine Recommendation
+                    </a>
+                </div>
+            </div>
+        </main>
+</body>
+</html>
