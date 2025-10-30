@@ -1,4 +1,4 @@
-python==3.12.10
+python==3.12
 Flask==3.1.2
 Flask-WTF==1.2.1
 WTForms==3.1.2
