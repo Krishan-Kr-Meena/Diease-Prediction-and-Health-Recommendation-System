@@ -1,4 +1,4 @@
-# PROJECT_NAME
+# Disease Prediction and Health Recommendation System
 
 Short description: one-line summary of what this project does and why it exists.
 
