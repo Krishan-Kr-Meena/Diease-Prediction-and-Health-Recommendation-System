@@ -490,7 +490,7 @@ def signin():
         else:
              flash('Login Unsuccessful. Please check email and password', 'danger')
             
-        return render_template('signin.html', form=form)
+    return render_template('signin.html', form=form) 
 
 
 @app.route('/register', methods=['GET', 'POST'])
